@@ -1,0 +1,30 @@
+[project]
+name = "ai-flashcards"
+version = "0.1.0"
+description = "AI service for generating flashcards"
+authors = [
+    {name = "devzeus",email = "hieu01bdvn@gmail.com"}
+]
+readme = "README.md"
+requires-python = ">=3.11, <4.0"
+dependencies = [
+    "langchain (>=1.2.0,<2.0.0)",
+    "langchain-google-genai (>=4.1.2,<5.0.0)",
+    "uvicorn (>=0.40.0,<0.41.0)",
+    "pydantic (>=2.12.5,<3.0.0)",
+    "pydantic-settings (>=2.12.0,<3.0.0)",
+    "python-dotenv (>=1.2.1,<2.0.0)",
+    "fastapi (>=0.128.0,<0.129.0)",
+    "shared-ai-lib @ file:///E:/KLTN/kltn-ai-services/shared-ai-lib"
+]
+
+[tool.poetry]
+packages = [{include = "ai_flashcards", from = "src"}]
+
+[tool.poetry.dependencies]
+python = ">=3.11, <4.0"
+shared-ai-lib = { path = "../shared-ai-lib", develop = true }
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
