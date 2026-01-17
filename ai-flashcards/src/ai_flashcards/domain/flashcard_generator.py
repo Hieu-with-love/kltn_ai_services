@@ -1,7 +1,7 @@
 from langchain_core.prompts import ChatPromptTemplate
 from shared_ai.llm.gemini import get_gemini_model
 
-def generate_flashcards(content: str, n: int, language: str):
+def generate_flashcards(content: str, n: int):
     prompt = ChatPromptTemplate.from_template("""
     Bạn là giảng viên đại học.
     Tạo {n} flashcards từ nội dung sau bằng ngôn ngữ {language}.
@@ -10,8 +10,8 @@ def generate_flashcards(content: str, n: int, language: str):
     {content}
 
     Format:
-    - Question:
-    - Answer:
+    - Front:
+    - Back:
     """)
 
     llm = get_gemini_model(temperature=0.3)
@@ -20,7 +20,7 @@ def generate_flashcards(content: str, n: int, language: str):
     response = chain.invoke({
         "content": content,
         "n": n,
-        "language": language
+        "language": "vietnamese"
     })
 
     return response.content
