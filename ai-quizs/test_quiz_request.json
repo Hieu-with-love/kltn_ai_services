@@ -1,0 +1,14 @@
+{
+    "topic": "OOP in java programming",
+    "questions": [
+        {
+            "type": "SINGLE_CHOICE",
+            "numberOfQuestions": [
+                {
+                    "difficulty": "EASY",
+                    "number": 5
+                }
+            ]
+        }
+    ]
+}

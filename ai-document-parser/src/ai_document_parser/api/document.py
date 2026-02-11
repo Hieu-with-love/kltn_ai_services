@@ -13,3 +13,5 @@ async def extract_document(file: UploadFile = File(...)):
         return DocumentExtractResponse(text=text, pages=pages, sourceType=doc_type)
     except ValueError as ve:
         raise HTTPException(status_code=400, detail=str(ve))
+
+# @router.post("/summarize", response_model=str)
