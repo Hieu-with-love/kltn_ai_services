@@ -16,4 +16,9 @@ class DocumentService:
             return text, 1, 'image'
         
         raise ValueError(f"Unsupported file extension: {extension}")
+
+    def extract_summary(file_name: str, file_bytes: bytes) -> str:
+        text,_ = DocumentService.extract(file_name, file_bytes)
+        # call the method to summarize text
+        
         
