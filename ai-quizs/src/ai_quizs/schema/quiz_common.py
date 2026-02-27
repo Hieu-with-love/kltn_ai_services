@@ -12,5 +12,3 @@ class QuizDifficulty(str, Enum):
     EASY = "EASY"
     MEDIUM = "MEDIUM"
     HARD = "HARD"
-
-

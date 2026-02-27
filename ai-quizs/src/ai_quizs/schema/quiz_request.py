@@ -10,10 +10,6 @@ class QuizTypeConfig(BaseModel):
     type: QuizType
     numberOfQuestions: List[QuizNumberConfig]
 
-class GenerateQuizRequestByContent(BaseModel):
-    content: str # Nội dung đã extract + summary (Teacher có thể sửa)
-    questions: List[QuizTypeConfig] # Loại câu hỏi và số lượng câu hỏi cho mỗi loại
-
-class GenerateQuizRequestByTopic(BaseModel):
-    topic: str # Chủ đề do Teacher cung cấp
+class GenerateQuizRequest(BaseModel):
+    context: str # Chủ đề do Teacher cung cấp or Nội dung đã extract + summary (Teacher có thể sửa)
     questions: List[QuizTypeConfig] # Loại câu hỏi và số lượng câu hỏi cho mỗi loại
