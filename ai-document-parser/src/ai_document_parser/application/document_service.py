@@ -1,6 +1,10 @@
-from .extractors.pdf_extractor import extract_pdf
-from .extractors.image_extractor import extract_image
+from ..domain.extractors.pdf_extractor import extract_pdf
+from ..domain.extractors.image_extractor import extract_image
+from ..domain.summarier.document_summary import summarize_document
 
+"""
+This service class is responsible for handling the core logic of document extraction and summarization.
+"""
 class DocumentService:
     
     @staticmethod
@@ -17,8 +21,11 @@ class DocumentService:
         
         raise ValueError(f"Unsupported file extension: {extension}")
 
-    def extract_summary(file_name: str, file_bytes: bytes) -> str:
-        text,_ = DocumentService.extract(file_name, file_bytes)
+    @staticmethod
+    async def extract_summary(file_name: str, file_bytes: bytes) -> str:
+        text, _, _ = DocumentService.extract(file_name, file_bytes)
         # call the method to summarize text
+        return await summarize_document(text)
+        
         
         

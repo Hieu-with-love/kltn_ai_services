@@ -1,13 +1,17 @@
-from pydantic import BaseModel, field_validator
-from typing import List, Optional, Dict, Union
+from pydantic import BaseModel, field_validator, Field
+from typing import List, Optional, Dict, Union, Literal, Annotated
 from .quiz_common import QuizType, QuizDifficulty
 
 class BaseQuestion(BaseModel):
     question: str
+    
+class UserOption(BaseModel):
+    text: str
+    is_correct: bool
 
 class SingleChoiceQuestionResponse(BaseQuestion):
-    options: List[Dict[str, bool]] # Danh sách các lựa chọn và thông tin đúng/sai
-    question_type: str = QuizType.SINGLE.value
+    question_type: Literal["SINGLE_CHOICE"] = QuizType.SINGLE.value
+    options: List[UserOption] # Danh sách các lựa chọn và thông tin đúng/sai
     difficulty: Optional[str] = QuizDifficulty.EASY.value
     score: Optional[int] = 1
     tags: Optional[List[str]] = []
@@ -18,14 +22,14 @@ class SingleChoiceQuestionResponse(BaseQuestion):
     def validate_options(cls, v):
         if len(v) != 4:
             raise ValueError('There must be exactly 4 options.')
-        correct_answers = [opt for opt in v if list(opt.values())[0] is True]
+        correct_answers = [opt for opt in v if opt.is_correct is True]
         if len(correct_answers) != 1:
             raise ValueError('There must be exactly one correct answer.')
         return v
 
 class MultipleChoiceQuestionResponse(BaseQuestion):
-    options: List[Dict[str, bool]] # Danh sách các lựa chọn và thông tin đúng/sai
-    question_type: str = QuizType.MULTIPLE.value
+    question_type: Literal["MULTIPLE_CHOICE"] = QuizType.MULTIPLE.value
+    options: List[UserOption] # Danh sách các lựa chọn và thông tin đúng/sai
     difficulty: Optional[str] = QuizDifficulty.EASY.value
     score: Optional[int] = 1
     tags: Optional[List[str]] = []
@@ -36,18 +40,14 @@ class MultipleChoiceQuestionResponse(BaseQuestion):
     def validate_options(cls, v):
         if len(v) != 4:
             raise ValueError('There must be exactly 4 options.')
-        correct_answers = [opt for opt in v if list(opt.values())[0] is True]
+        correct_answers = [opt for opt in v if opt.is_correct is True]
         if len(correct_answers) < 1:
             raise ValueError('There must be at least one correct answer.')
         return v
 
-class TrueFalseOption(BaseModel):
-    text: str
-    is_correct: bool
-
 class TrueFalseQuestionResponse(BaseQuestion):
-    options: List[TrueFalseOption] # Danh sách các lựa chọn và thông tin đúng/sai
-    question_type: str = QuizType.TRUE_FALSE.value
+    question_type: Literal["TRUE_FALSE"] = QuizType.TRUE_FALSE.value
+    options: List[UserOption] # Danh sách các lựa chọn và thông tin đúng/sai
     difficulty: Optional[str] = QuizDifficulty.EASY.value
     score: Optional[int] = 1
     tags: Optional[List[str]] = []
@@ -57,31 +57,37 @@ class TrueFalseQuestionResponse(BaseQuestion):
     def validate_options(cls, v):
         if len(v) != 2:
             raise ValueError('There must be exactly 2 options for True/False questions.')
-        correct_answers = [opt for opt in v if list(opt.values())[0] is True]
+        correct_answers = [opt for opt in v if opt.is_correct is True]
         if len(correct_answers) != 1:
             raise ValueError('There must be exactly one correct answer.')
         return v
 
+class Blank(BaseModel):
+    blank_number: int
+    answer: str
 class FillInTheBlankQuestionResponse(BaseQuestion):
-    answer: List[str] # Danh sách các câu trả lời đúng
-    question_type: str = QuizType.FILL_BLANK.value
+    question_type: Literal["FILL_IN_THE_BLANK"] = QuizType.FILL_BLANK.value
+    options: List[Blank] # Danh sách các đáp án đúng theo thứ tự blank: answers[0] cho [___1___], answers[1] cho [___2___], ...
     difficulty: Optional[str] = QuizDifficulty.EASY.value
     score: Optional[int] = 1
     tags: Optional[List[str]] = []
 
-    @field_validator('answer')
+    @field_validator('options')
     @classmethod
-    def validate_answer(cls, v):
+    def validate_options(cls, v):
         if len(v) < 1:
-            raise ValueError('There must be at least one correct answer.')
+            raise ValueError('Có ít nhất 1 chỗ trống trong câu hỏi điền vào chỗ trống.')
         return v
 
 class GenerateQuizResponse(BaseModel):
     questions: List[
-        Union[
-            SingleChoiceQuestionResponse,
-            MultipleChoiceQuestionResponse,
-            TrueFalseQuestionResponse,
-            FillInTheBlankQuestionResponse
+        Annotated[
+            Union[
+                SingleChoiceQuestionResponse,
+                MultipleChoiceQuestionResponse,
+                TrueFalseQuestionResponse,
+                FillInTheBlankQuestionResponse
+            ],
+            Field(discriminator="question_type")
         ]
     ]
