@@ -17,4 +17,4 @@ extract_document_app.add_middleware(
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(extract_document_app, host="0.0.0.0", port=8000)
+    uvicorn.run(extract_document_app, host="0.0.0.0", port=8001)
