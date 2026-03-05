@@ -1,11 +1,12 @@
 # src/ai_flashcards/api/routes.py
 from fastapi import APIRouter
-from ai_flashcards.api.schemas import FlashCardRequest
+from ..schema.flashcard_request import FlashCardRequest
+from ..schema.flashcard_response import FlashCardResponse
 from ai_flashcards.application.service import FlashcardService
 
 router = APIRouter()
 
-@router.post("/generate")
+@router.post("/generate", response_model=FlashCardResponse)
 def generate_flashcards(req: FlashCardRequest):
     return FlashcardService().generate(req)
 
