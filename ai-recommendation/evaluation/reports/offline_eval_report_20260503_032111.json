@@ -1,0 +1,132 @@
+{
+  "generated_at": "2026-05-03T03:21:11.854312Z",
+  "dataset": "C:\\Users\\phihi_6b0xaz1\\Desktop\\Course_Management\\kltn_ai_services\\ai-recommendation\\evaluation\\sample_offline_eval_dataset.json",
+  "total_cases": 2,
+  "k_values": [
+    3,
+    5,
+    10
+  ],
+  "baseline_summary": {
+    "precision@3": 0.5,
+    "recall@3": 0.5833333333333333,
+    "ndcg@3": 0.5052458427084319,
+    "precision@5": 0.5,
+    "recall@5": 1.0,
+    "ndcg@5": 0.7146155953617563,
+    "precision@10": 0.25,
+    "recall@10": 1.0,
+    "ndcg@10": 0.7146155953617563
+  },
+  "hybrid_summary": {
+    "precision@3": 0.6666666666666666,
+    "recall@3": 0.8333333333333333,
+    "ndcg@3": 0.8826803184943108,
+    "precision@5": 0.5,
+    "recall@5": 1.0,
+    "ndcg@5": 0.9734512147629872,
+    "precision@10": 0.25,
+    "recall@10": 1.0,
+    "ndcg@10": 0.9734512147629872
+  },
+  "uplift_percent": {
+    "precision@3": 33.33333333333333,
+    "recall@3": 42.85714285714286,
+    "ndcg@3": 74.70313338207703,
+    "precision@5": 0.0,
+    "recall@5": 0.0,
+    "ndcg@5": 36.22025898695953,
+    "precision@10": 0.0,
+    "recall@10": 0.0,
+    "ndcg@10": 36.22025898695953
+  },
+  "case_reports": [
+    {
+      "case_id": "python_learner_001",
+      "relevant_ids": [
+        "2",
+        "3",
+        "8"
+      ],
+      "baseline_top": [
+        "3",
+        "10",
+        "8",
+        "6",
+        "2"
+      ],
+      "hybrid_top": [
+        "2",
+        "8",
+        "10",
+        "6",
+        "3"
+      ],
+      "baseline_metrics": {
+        "precision@3": 0.6666666666666666,
+        "recall@3": 0.6666666666666666,
+        "ndcg@3": 0.7039180890341347,
+        "precision@5": 0.6,
+        "recall@5": 1.0,
+        "ndcg@5": 0.8854598815714874,
+        "precision@10": 0.3,
+        "recall@10": 1.0,
+        "ndcg@10": 0.8854598815714874
+      },
+      "hybrid_metrics": {
+        "precision@3": 0.6666666666666666,
+        "recall@3": 0.6666666666666666,
+        "ndcg@3": 0.7653606369886217,
+        "precision@5": 0.6,
+        "recall@5": 1.0,
+        "ndcg@5": 0.9469024295259745,
+        "precision@10": 0.3,
+        "recall@10": 1.0,
+        "ndcg@10": 0.9469024295259745
+      }
+    },
+    {
+      "case_id": "frontend_learner_002",
+      "relevant_ids": [
+        "2",
+        "3"
+      ],
+      "baseline_top": [
+        "11",
+        "17",
+        "2",
+        "8",
+        "3"
+      ],
+      "hybrid_top": [
+        "2",
+        "3",
+        "11",
+        "17",
+        "8"
+      ],
+      "baseline_metrics": {
+        "precision@3": 0.3333333333333333,
+        "recall@3": 0.5,
+        "ndcg@3": 0.3065735963827292,
+        "precision@5": 0.4,
+        "recall@5": 1.0,
+        "ndcg@5": 0.5437713091520254,
+        "precision@10": 0.2,
+        "recall@10": 1.0,
+        "ndcg@10": 0.5437713091520254
+      },
+      "hybrid_metrics": {
+        "precision@3": 0.6666666666666666,
+        "recall@3": 1.0,
+        "ndcg@3": 1.0,
+        "precision@5": 0.4,
+        "recall@5": 1.0,
+        "ndcg@5": 1.0,
+        "precision@10": 0.2,
+        "recall@10": 1.0,
+        "ndcg@10": 1.0
+      }
+    }
+  ]
+}
