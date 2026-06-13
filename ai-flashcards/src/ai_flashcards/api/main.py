@@ -8,7 +8,7 @@ from ai_flashcards.api.routes import router
 
 app = FastAPI(title="AI Flashcards Service")
 
-app.include_router(router, prefix="/api/v1/flashcards")
+app.include_router(router, prefix="/api/v1/flashcard")
 
 # Permit calling the API directly from browser
 app.add_middleware(
