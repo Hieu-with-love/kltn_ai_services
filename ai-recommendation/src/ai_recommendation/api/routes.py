@@ -12,6 +12,7 @@ async def recommend_courses(
     req: RecommendationRequest,
     service: RecommendationService = Depends(get_service)
 ):
+    print(f"--- [RECV] Full Request Payload: {req.model_dump()} ---")
     print(f"--- [RECV] Request from User: {req.user_profile.user_id} ---")
     print(f"Interests: {req.user_profile.interests}")
     
