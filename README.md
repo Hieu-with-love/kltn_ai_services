@@ -1,6 +1,6 @@
-# kltn-ai-services
+# AI Agent Project for OpenEdu Platform
 
-A Python-based microservices suite providing AI-powered features for an e-learning platform. Each service exposes a FastAPI REST API and is backed by Google Gemini 2.5-Flash via LangChain. The services are designed to integrate with a Spring Boot backend.
+A Python-based microservices suite providing AI-powered features for an E-Learning mixed with LMS platform. Each service exposes a FastAPI REST API and is backed by Google Gemini 2.5-Flash via LangChain. The services are designed to integrate with a Spring Boot backend.
 
 ## Services
 
@@ -131,6 +131,6 @@ poetry run pytest
 ## Contributing
 
 1. Fork the repository.
-2. Create a feature branch (`git checkout -b feat/my-feature`).
+2. Create a feature branch (`git checkout -b feat/your-feature`).
 3. Commit your changes.
 4. Open a pull request against `main`.
